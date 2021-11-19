@@ -23,12 +23,14 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #cdd6ef;
+
 }
 
 .app {
   width: 70%;
+  min-height: 100vh;
   padding: 10px;
-  margin: 5px auto;
+  margin: 2px auto;
+  background: #cdd6ef;
 }
 </style>

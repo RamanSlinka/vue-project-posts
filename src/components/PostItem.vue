@@ -8,6 +8,11 @@
 
     <div class="post_btns">
       <my-button
+      @click="$router.push(`/posts/${post.id}`)"
+      >
+        Open
+      </my-button>
+      <my-button
       @click="$emit('remove', post)"
       >Delete</my-button>
     </div>
@@ -37,5 +42,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: white;
+}
+.post_btns{
+  display: flex;
+  margin: 5px;
 }
 </style>

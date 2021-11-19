@@ -1,9 +1,10 @@
 <template>
-  <div >
+  <div>
     <h2>Posts page</h2>
 
     <my-input
-        v-model="searchQuery"
+        :model-value="searchQuery"
+        @update:model-value="setSearchQuery"
         placeholder="Search by title..."
     />
     <div class="app_btns">
@@ -13,7 +14,8 @@
       </my-button>
 
       <my-select
-          v-model="selectedSort"
+          :model-value="selectedSort"
+          @update:model-value="setSelectedSort"
           :options="sortOption"
       />
     </div>
@@ -30,6 +32,7 @@
                @remove="removePost"
                v-if="!isPostLoading"
     />
+
     <div v-else>Loading...</div>
     <div class="page_wrapper">
       <div
@@ -51,10 +54,10 @@
 
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
-import axios from "axios"
 import MyButton from "@/components/UI/MyButton";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
+import {mapState, mapActions, mapGetters, mapMutations} from 'vuex';
 
 export default {
 
@@ -69,21 +72,19 @@ export default {
 
   data() {
     return {
-      posts: [],
       dialogVisible: false,
-      isPostLoading: false,
-      selectedSort: '',
-      searchQuery: '',
-      pageNumber: 1,
-      limit: 10,
-      totalPage: 0,
-      sortOption: [
-        {value: 'title', name: 'By title'},
-        {value: 'body', name: 'By description'}
-      ]
     }
   },
   methods: {
+    ...mapMutations({
+      setPage: 'post/setPage',
+      setSearchQuery: 'post/setSearchQuery',
+      setSelectedSort: 'post/setSelectedSort'
+    }),
+    ...mapActions({
+      fetchPosts: 'post/fetchPosts'
+    }),
+
     createPost(post) {
       this.posts.push(post);
       this.dialogVisible = false;
@@ -98,38 +99,26 @@ export default {
       this.page = pageNumber
       this.fetchPosts()
     },
-    async fetchPosts() {
-      try {
-        this.isPostLoading = true;
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-          params: {
-            _page: this.page,
-            _limit: this.limit
-          }
-        });
-        this.totalPage = Math.ceil(response.headers['x-total-count'] / this.limit)
-        this.posts = response.data;
 
-      } catch (e) {
-        alert('error')
-      } finally {
-        this.isPostLoading = false;
-      }
-    }
   },
   mounted() {
     this.fetchPosts();
   },
   computed: {
-    sortedPosts() {
-      return [...this.posts].sort((post1, post2) => {
-        return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
-      })
-    },
-    sortedAndSearchedPosts() {
-      return this.sortedPosts.filter(post =>
-          post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
-    }
+    ...mapState({
+      posts: state => state.post.posts,
+      isPostLoading: state => state.post.isPostLoading,
+      selectedSort: state => state.post.selectedSort,
+      searchQuery: state => state.post.searchQuery,
+      pageNumber: state => state.post.pageNumber,
+      limit: state => state.post.limit,
+      totalPage: state => state.post.totalPage,
+      sortOption: state => state.post.sortOption
+    }),
+    ...mapGetters({
+      sortedPosts: 'post/sortedPosts' ,
+      sortedAndSearchedPosts: 'post/sortedAndSearchedPosts'
+    })
   },
   watch: {}
 }
