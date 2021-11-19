@@ -1,10 +1,9 @@
 <template>
   <div>
-  <navbar></navbar>
-  <div class="app">
-
-<router-view></router-view>
-  </div>
+    <navbar></navbar>
+    <div class="app">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -18,8 +17,8 @@ export default {
 }
 </script>
 
-<style >
-*{
+<style>
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;

@@ -8,10 +8,7 @@
         placeholder="Search by title..."
     />
     <div class="app_btns">
-      <my-button
-          @click="showDialog"
-      >Create post
-      </my-button>
+
 
       <my-select
           :model-value="selectedSort"
@@ -54,7 +51,6 @@
 
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
-import MyButton from "@/components/UI/MyButton";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex';
@@ -64,7 +60,6 @@ export default {
   components: {
     MyInput,
     MySelect,
-    MyButton,
     PostList,
     PostForm
   },
@@ -117,7 +112,8 @@ export default {
     }),
     ...mapGetters({
       sortedPosts: 'post/sortedPosts' ,
-      sortedAndSearchedPosts: 'post/sortedAndSearchedPosts'
+      sortedAndSearchedPosts: 'post/sortedAndSearchedPosts',
+
     })
   },
   watch: {}
