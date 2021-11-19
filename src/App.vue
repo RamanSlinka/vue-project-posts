@@ -1,16 +1,17 @@
 <template>
   <div class="app">
     <h2>Posts page</h2>
-    <my-button
-        style="margin: 15px 0"
-        @click="showDialog"
-    >Create post
-    </my-button>
+    <div class="app_btns">
+      <my-button
+          @click="showDialog"
+      >Create post
+      </my-button>
+      <my-select
+      v-model="selectedSort"
+      :options="sortOption"
+      />
+    </div>
 
-    <my-button
-        @click="fetchPosts"
-    >Get posts
-    </my-button>
 
     <my-dialog v-model="dialogVisible">
       //v-model:show="dialogVisible"
@@ -19,7 +20,7 @@
       />
     </my-dialog>
 
-    <post-list :posts="posts"
+    <post-list :posts="sortedPosts"
                @remove="removePost"
                v-if="!isPostLoading"
     />
@@ -33,9 +34,11 @@ import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 import axios from "axios"
 import MyButton from "@/components/UI/MyButton";
+import MySelect from "@/components/UI/MySelect";
 
 export default {
   components: {
+    MySelect,
     MyButton,
     PostList, PostForm
   },
@@ -46,13 +49,17 @@ export default {
       posts: [],
       dialogVisible: false,
       isPostLoading: false,
+      selectedSort: '',
+      sortOption: [
+        {value: 'title', name: 'By title'},
+        {value: 'body', name: 'By description'}
+      ]
     }
   },
   methods: {
     createPost(post) {
       this.posts.push(post);
       this.dialogVisible = false;
-
     },
     removePost(post) {
       this.posts = this.posts.filter(p => p.id !== post.id)
@@ -68,28 +75,40 @@ export default {
 
       } catch (e) {
         alert('error')
-      }
-      finally {
+      } finally {
         this.isPostLoading = false;
       }
-    },
-
-    mounted() {
-      this.fetchPosts();
     }
+  },
+  mounted() {
+    this.fetchPosts();
+  },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
+        return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+      })
+  },
+  watch: {}
   }
 }
 </script>
 
 <style>
 * {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
 }
 
 .app {
+  width: 60%;
   padding: 10px;
 }
 
+.app_btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
 </style>
