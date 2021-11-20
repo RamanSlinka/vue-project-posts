@@ -8,6 +8,7 @@
 export default {
   name: "PostIdPage"
 }
+
 </script>
 
 <style scoped>

@@ -29,6 +29,9 @@ export const postModule = {
         setPosts(state, posts) {
             state.posts = posts
         },
+        setPost(state, post) {
+            state.post = post
+        },
         setLoading(state, bool) {
             state.isPostsLoading = bool
         },
@@ -63,6 +66,14 @@ export const postModule = {
                 alert('error')
             } finally {
                 commit('setLoading', false)
+            }
+        },
+        async fetchPost({ commit}) {
+            try {
+                const response = await axios.get('https://jsonplaceholder.typicode.com/comments?postId=1')
+            commit('setPost', response.data)
+            } catch (e) {
+                alert('error')
             }
         }
     },
