@@ -8,8 +8,6 @@
         placeholder="Search by title..."
     />
     <div class="app_btns">
-
-
       <my-select
           :model-value="selectedSort"
           @update:model-value="setSelectedSort"
@@ -120,7 +118,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 
 .app_btns {
@@ -132,15 +130,15 @@ export default {
 .page_wrapper {
   display: flex;
   margin-top: 15px;
+  .page {
+    border: 1px $border-color solid;
+    padding: 10px;
+  }
 }
 
-.page {
-  border: 1px #0636ee solid;
-  padding: 10px;
-}
 
 .current_page {
-  border: 2px #0636ee solid;
+  border: 2px $border-color solid;
   background: rgba(6, 54, 238, 0.32);
 }
 </style>

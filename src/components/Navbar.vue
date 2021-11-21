@@ -15,17 +15,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
  .navbar{
    height: 70px;
-   background-color: #a2b3f5;
+   background-color: $background-nav;
    box-shadow: 2px 2px 4px gray;
    display: flex;
    align-items: center;
    padding: 0 15px;
+   .navbar_btns{
+     margin-left: auto;
+   }
  }
- .navbar_btns{
-   margin-left: auto;
- }
+
 
 </style>

@@ -17,19 +17,14 @@ export default {
 }
 </script>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+<style lang="scss">
 
-}
 
 .app {
   width: 70%;
   min-height: 100vh;
   padding: 10px;
   margin: 2px auto;
-  background: #cdd6ef;
+  background-color: $background-app;
 }
 </style>

@@ -10,12 +10,12 @@ export  default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .btn {
   align-self: flex-end;
   padding: 10px 15px;
   background: none;
-  color: #0636ee;
-  border: #0636ee 1px solid;
+  color: $border-color;
+  border: $border-color 1px solid;
 }
 </style>

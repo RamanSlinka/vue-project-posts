@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .post-list-item {
   display: inline-block;
   margin-right: 10px;

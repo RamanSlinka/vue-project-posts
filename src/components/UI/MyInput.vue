@@ -16,10 +16,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .input {
   width: 100%;
-  border: 1px solid #0636ee;
+  border: 1px solid $border-color;
   padding: 10px 15px;
   margin-top: 15px;
 }

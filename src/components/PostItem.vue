@@ -34,18 +34,19 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .post {
   padding: 15px;
-  border: 2px solid #0636ee;
+  border: 2px solid $border-color;
   margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: $background;
+  .post_btns{
+    display: flex;
+    margin: 5px;
+  }
 }
-.post_btns{
-  display: flex;
-  margin: 5px;
-}
+
 </style>
