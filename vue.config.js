@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath: '/vue-project-posts/',
+    publicPath: process.env.NODE_ENV === "production" ? "/vue-project-posts/" : "/",
     css: {
         loaderOptions: {
             sass: {
