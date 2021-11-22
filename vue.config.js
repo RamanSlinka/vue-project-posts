@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath: '/vue-project-posts/',
     css: {
         loaderOptions: {
             sass: {
